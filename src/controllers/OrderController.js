@@ -92,6 +92,7 @@ module.exports = {
     projectsToSend = projectsToSend.filter((item) => item);
 
     if (projectsToSend.length === 0) {
+      fs.rmdirSync(directory, { recursive: true });
       return response.status(400).json({
         error: 'NO_PROJECTS_TO_SEND',
       });
@@ -105,17 +106,18 @@ module.exports = {
         path: path.join(directory, file),
       }));
 
-    await new Promise((resolve, reject) => {
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_PASSWORD,
-        },
-        tls: { rejectUnauthorized: false },
-      });
+    try {
+      await new Promise((resolve, reject) => {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASSWORD,
+          },
+          tls: { rejectUnauthorized: false },
+        });
 
-      const html = `
+        const html = `
         <p>Olá ${order.cliente.nome}! Tudo bem?</p>
         <p>Aqui estão os arquivos dos projetos que você comprou na nossa loja.</p>
         <br>
@@ -129,24 +131,29 @@ module.exports = {
         <br>
         <a href="https://loja.artesnoreino.com.br">Clique aqui para acessar a nossa lojinha</a>`;
 
-      const mailOptions = {
-        from: `"Artes no Reino" <${process.env.GMAIL_USER}`,
-        to: order.cliente.email,
-        subject: `Pedido de venda #${id}`,
-        html,
-        attachments,
-      };
+        const mailOptions = {
+          from: `"Artes no Reino" <${process.env.GMAIL_USER}`,
+          to: order.cliente.email,
+          subject: `Pedido de venda #${id}`,
+          html,
+          attachments,
+        };
 
-      transporter.sendMail(mailOptions, (error) => {
-        fs.rmdirSync(directory, { recursive: true });
+        transporter.sendMail(mailOptions, (error) => {
+          fs.rmdirSync(directory, { recursive: true });
 
-        if (error) {
-          return reject();
-        }
+          if (error) {
+            return reject();
+          }
 
-        return resolve();
+          return resolve();
+        });
       });
-    });
+    } catch (e) {
+      return response.status(400).json({
+        error: 'EMAIL_FAIL',
+      });
+    }
 
     const codigo = order.itens.length !== projectsToSend.length ? 'em_producao' : 'pedido_entregue';
 

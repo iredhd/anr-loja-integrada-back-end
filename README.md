@@ -57,6 +57,7 @@ yarn dev
 |ID_NOT_FOUND|Required ID not sent on parameters|
 |ORDER_NOT_FOUND|Order not found on Loja Integrada API|
 |NO_PROJECTS_TO_SEND|The order requested doesn't have any project to send registered on firebase|
+|EMAIL_FAIL|The email request has been failed. It can be about auth, server, etc.|
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
