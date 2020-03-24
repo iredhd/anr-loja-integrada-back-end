@@ -14,6 +14,7 @@ module.exports = {
     if (!id) {
       return response.status(400).json({
         error: 'ID_NOT_FOUND',
+        status: null,
       });
     }
 
@@ -37,6 +38,7 @@ module.exports = {
     } catch (e) {
       return response.status(400).json({
         error: 'ORDER_NOT_FOUND',
+        status: null,
       });
     }
 
@@ -95,6 +97,7 @@ module.exports = {
       fs.rmdirSync(directory, { recursive: true });
       return response.status(400).json({
         error: 'NO_PROJECTS_TO_SEND',
+        status: null,
       });
     }
 
@@ -152,6 +155,7 @@ module.exports = {
     } catch (e) {
       return response.status(400).json({
         error: 'EMAIL_FAIL',
+        status: null,
       });
     }
 
@@ -163,7 +167,7 @@ module.exports = {
 
     return response.status(200).json({
       error: null,
-      status: codigo === 'pedido_entregue' ? 'SUCCESS' : 'PARTIAL_SUCESS',
+      status: codigo === 'pedido_entregue' ? 'SUCCESS' : 'PARTIAL_SUCCESS',
     });
   },
 };

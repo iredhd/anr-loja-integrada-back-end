@@ -38,8 +38,8 @@ yarn dev
 ###### Possible Status
 |Code|Description|
 |:-:|:-:|
-|SUCESS|Project sent and status changed on Loja Integrada API|
-|PARTIAL_SUCESS|Projects sent but there are more itens in the order|
+|SUCCESS|Project sent and status changed on Loja Integrada API|
+|PARTIAL_SUCCESS|Projects sent but there are more itens in the order|
 
 ##### Handling Errors
 
