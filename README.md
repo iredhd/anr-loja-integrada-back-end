@@ -38,8 +38,8 @@ yarn dev
 ###### Possible Status
 |Code|Description|
 |:-:|:-:|
-|SUCCESS|Project sent and status changed on Loja Integrada API|
-|PARTIAL_SUCCESS|Projects sent but there are more itens in the order|
+|SUCCESS|Order sent and status changed on Loja Integrada API|
+|PARTIAL_SUCCESS|Products sent but there are more itens in the order|
 
 ##### Handling Errors
 
@@ -47,8 +47,8 @@ yarn dev
 
 |Code|Description|
 |:-:|:-:|
-|200|Project sent|
-|400|Project not sent|
+|200|Order sent|
+|400|Order not sent|
 
 ###### Error Codes
 
@@ -56,7 +56,7 @@ yarn dev
 |:-:|:-:|
 |ID_NOT_FOUND|Required ID not sent on parameters|
 |ORDER_NOT_FOUND|Order not found on Loja Integrada API|
-|NO_PRODUCTS_TO_SEND|The order requested doesn't have any project to send registered on firebase|
+|NO_PRODUCTS_TO_SEND|The order requested doesn't have any product to send registered on firebase|
 |EMAIL_FAIL|The email request has been failed. It can be about auth, server, etc.|
 
 ## Contributing
