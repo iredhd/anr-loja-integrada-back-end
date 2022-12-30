@@ -28,6 +28,6 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
     "nodemon": "^2.0.2",
-    "release-it": "^13.1.2"
+    "release-it": "^13.7.2"
   }
 }
